@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reviews - Italian Paradise - FoodFinder</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    .rating-box {
+      background: #f8f9fa;
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .rating-large {
+      font-size: 3.5em;
+      font-weight: bold;
+      color: #FF4B2B;
+    }
+
+    .rating-bar {
+      height: 8px;
+      background: #e9ecef;
+      border-radius: 4px;
+      margin: 8px 0;
+    }
+
+    .rating-fill {
+      height: 100%;
+      background: #FF4B2B;
+      border-radius: 4px;
+    }
+
+    .review-card {
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      margin-bottom: 20px;
+    }
+
+    .review-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .review-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 15px;
+    }
+
+    .review-photos {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 10px 0;
+    }
+
+    .review-photo {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .filter-btn {
+      border: 1px solid #dee2e6;
+      border-radius: 20px;
+      padding: 8px 16px;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      background: white;
+      transition: all 0.3s;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: #FF4B2B;
+      color: white;
+      border-color: #FF4B2B;
+    }
+
+    .star-rating {
+      color: #ffc107;
+    }
+
+    .helpful-btn {
+      border: 1px solid #dee2e6;
+      border-radius: 20px;
+      padding: 5px 15px;
+      background: white;
+      transition: all 0.3s;
+    }
+
+    .helpful-btn:hover {
+      background: #f8f9fa;
+    }
+
+    .write-review-btn {
+      background-color: #FF4B2B;
+      border-color: #FF4B2B;
+    }
+
+    .write-review-btn:hover {
+      background-color: #FF3517;
+      border-color: #FF3517;
+    }
+  </style>
+</head>
+<body class="bg-light">
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <div class="container">
+      <a class="navbar-brand" href="#">FoodFinder</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="homepage.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Explore</a></li>
+          <li class="nav-item"><a class="nav-link" href="Modern Login Page.html">Login</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container my-4">
+    <!-- Restaurant Header -->
+    <div class="mb-4">
+      <h1>Italian Paradise</h1>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Restaurants</a></li>
+          <li class="breadcrumb-item"><a href="#">Italian</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Reviews</li>
+        </ol>
+      </nav>
+    </div>
+
+    <div class="row">
+      <!-- Left Column - Rating Summary -->
+      <div class="col-lg-4">
+        <div class="rating-box mb-4">
+          <div class="text-center mb-3">
+            <div class="rating-large">4.8</div>
+            <div class="star-rating mb-2">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+            </div>
+            <div class="text-muted">Based on 523 reviews</div>
+          </div>
+
+          <div class="rating-bars">
+            <div class="d-flex align-items-center mb-2">
+              <span class="me-2">5</span>
+              <div class="rating-bar flex-grow-1">
+                <div class="rating-fill" style="width: 80%"></div>
+              </div>
+              <span class="ms-2">420</span>
+            </div>
+            <div class="d-flex align-items-center mb-2">
+              <span class="me-2">4</span>
+              <div class="rating-bar flex-grow-1">
+                <div class="rating-fill" style="width: 15%"></div>
+              </div>
+              <span class="ms-2">78</span>
+            </div>
+            <div class="d-flex align-items-center mb-2">
+              <span class="me-2">3</span>
+              <div class="rating-bar flex-grow-1">
+                <div class="rating-fill" style="width: 3%"></div>
+              </div>
+              <span class="ms-2">15</span>
+            </div>
+            <div class="d-flex align-items-center mb-2">
+              <span class="me-2">2</span>
+              <div class="rating-bar flex-grow-1">
+                <div class="rating-fill" style="width: 1%"></div>
+              </div>
+              <span class="ms-2">6</span>
+            </div>
+            <div class="d-flex align-items-center">
+              <span class="me-2">1</span>
+              <div class="rating-bar flex-grow-1">
+                <div class="rating-fill" style="width: 1%"></div>
+              </div>
+              <span class="ms-2">4</span>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn write-review-btn text-white w-100 mb-4">
+          <i class="fas fa-pencil-alt me-2"></i>Write a Review
+        </button>
+
+        <!-- Filters -->
+        <div class="mb-4">
+          <h5>Filter Reviews</h5>
+          <div class="mb-3">
+            <button class="filter-btn active">All</button>
+            <button class="filter-btn">5 Star</button>
+            <button class="filter-btn">4 Star</button>
+            <button class="filter-btn">3 Star</button>
+            <button class="filter-btn">With Photos</button>
+          </div>
+          <select class="form-select mb-3">
+            <option>Sort by: Most Recent</option>
+            <option>Highest Rated</option>
+            <option>Lowest Rated</option>
+            <option>Most Helpful</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Right Column - Reviews List -->
+      <div class="col-lg-8">
+        <!-- Review Cards -->
+        <div class="review-card card p-4 mb-4">
+          <div class="review-header">
+            <img src="https://i.pravatar.cc/150?img=1" class="review-avatar" alt="User Avatar">
+            <div>
+              <h5 class="mb-1">John Smith</h5>
+              <div class="text-muted">
+                <small>Reviewed 2 days ago</small>
+              </div>
+            </div>
+          </div>
+          <div class="star-rating mb-2">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p>The best Italian restaurant I've been to outside of Italy! The pasta is made fresh daily and you can really taste the difference. The service was impeccable and the atmosphere was perfect for our anniversary dinner.</p>
+          <div class="review-photos mb-3">
+            <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141" class="review-photo" alt="Food Photo">
+            <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002" class="review-photo" alt="Food Photo">
+          </div>
+          <div class="d-flex align-items-center">
+            <button class="helpful-btn me-3">
+              <i class="far fa-thumbs-up me-1"></i> Helpful (24)
+            </button>
+            <button class="helpful-btn">
+              <i class="far fa-comment me-1"></i> Comment
+            </button>
+          </div>
+        </div>
+
+        <div class="review-card card p-4 mb-4">
+          <div class="review-header">
+            <img src="https://i.pravatar.cc/150?img=2" class="review-avatar" alt="User Avatar">
+            <div>
+              <h5 class="mb-1">Sarah Johnson</h5>
+              <div class="text-muted">
+                <small>Reviewed 1 week ago</small>
+              </div>
+            </div>
+          </div>
+          <div class="star-rating mb-2">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="far fa-star"></i>
+          </div>
+          <p>Great food and atmosphere! The margherita pizza was delicious and had the perfect thin crust. Only giving 4 stars because the service was a bit slow during peak hours.</p>
+          <div class="d-flex align-items-center">
+            <button class="helpful-btn me-3">
+              <i class="far fa-thumbs-up me-1"></i> Helpful (12)
+            </button>
+            <button class="helpful-btn">
+              <i class="far fa-comment me-1"></i> Comment
+            </button>
+          </div>
+        </div>
+
+        <!-- Load More Button -->
+        <div class="text-center">
+          <button class="btn btn-outline-primary">Load More Reviews</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-light py-4 mt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h5>FoodFinder</h5>
+          <p>Discover & Share Amazing Food Experiences</p>
+        </div>
+        <div class="col-md-4">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a href="#" class="text-light">About Us</a></li>
+            <li><a href="#" class="text-light">Contact</a></li>
+            <li><a href="#" class="text-light">Terms of Service</a></li>
+            <li><a href="#" class="text-light">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5>Connect With Us</h5>
+          <div class="social-links">
+            <a href="#" class="text-light me-3"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="text-light me-3"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-light me-3"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

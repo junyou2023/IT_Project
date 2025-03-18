@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FoodFinder - Discover Amazing Food Experiences</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    .hero-section {
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0');
+      background-size: cover;
+      background-position: center;
+      height: 80vh;
+      display: flex;
+      align-items: center;
+      color: white;
+    }
+    
+    .search-bar {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .feature-card {
+      padding: 20px;
+      margin: 15px 0;
+      transition: transform 0.3s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .btn-primary {
+      background-color: #FF4B2B;
+      border-color: #FF4B2B;
+    }
+
+    .btn-primary:hover {
+      background-color: #FF3517;
+      border-color: #FF3517;
+    }
+
+    .text-primary {
+      color: #FF4B2B !important;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="#">FoodFinder</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <a class="nav-link" href="{% url 'Homepage' %}">Home</a>
+          <li class="nav-item"><a class="nav-link" href="#">Explore</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Login</a></li>
+          <li class="nav-item"><a class="nav-link btn btn-primary text-white" href="#">Sign Up</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 mx-auto text-center">
+          <h1 class="display-4 mb-4">Discover & Share Amazing Food Experiences</h1>
+          <div class="search-bar">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search restaurants, cuisines, or dishes...">
+              <button class="btn btn-primary" type="button">
+                <i class="fas fa-search"></i> Search
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-5">Why Choose FoodFinder</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="feature-card text-center shadow-sm rounded">
+            <i class="fas fa-utensils fa-3x mb-3 text-primary"></i>
+            <h3>Informed Dining</h3>
+            <p>Compare real reviews, photos, and ratings to pick the perfect eatery.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-card text-center shadow-sm rounded">
+            <i class="fas fa-users fa-3x mb-3 text-primary"></i>
+            <h3>Community Engagement</h3>
+            <p>Join a vibrant community of food lovers sharing experiences.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-card text-center shadow-sm rounded">
+            <i class="fas fa-store fa-3x mb-3 text-primary"></i>
+            <h3>Business Growth</h3>
+            <p>Give restaurants a chance to showcase their brand and specials.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular Categories -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center mb-5">Popular Categories</h2>
+      <div class="row g-4">
+        <div class="col-6 col-md-3">
+          <div class="card h-100">
+            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591" class="card-img-top" alt="Italian">
+            <div class="card-body text-center">
+              <h5 class="card-title">Italian</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="card h-100">
+            <img src="https://images.unsplash.com/photo-1512152272829-e3139592d56f" class="card-img-top" alt="Japanese">
+            <div class="card-body text-center">
+              <h5 class="card-title">Japanese</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="card h-100">
+            <img src="https://images.unsplash.com/photo-1464500542410-1396074bf230" class="card-img-top" alt="Mexican">
+            <div class="card-body text-center">
+              <h5 class="card-title">Mexican</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="card h-100">
+            <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246" class="card-img-top" alt="Chinese">
+            <div class="card-body text-center">
+              <h5 class="card-title">Chinese</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-light py-4 mt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h5>FoodFinder</h5>
+          <p>Discover & Share Amazing Food Experiences</p>
+        </div>
+        <div class="col-md-4">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a href="#" class="text-light">About Us</a></li>
+            <li><a href="#" class="text-light">Contact</a></li>
+            <li><a href="#" class="text-light">Terms of Service</a></li>
+            <li><a href="#" class="text-light">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5>Connect With Us</h5>
+          <div class="social-links">
+            <a href="#" class="text-light me-3"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="text-light me-3"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-light me-3"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-12 text-center">
+          <p class="mb-0">© 2025 FoodFinder. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

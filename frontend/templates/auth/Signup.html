@@ -1,0 +1,78 @@
+{% extends "Base.html" %}
+{% load static %}
+
+{% block title %}Sign Up - FoodFinder{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/Signup.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/auth/Signup.js' %}?v=1.0"></script>
+{% endblock %}
+
+{% block content %}
+<div class="signup-container container">
+    <div class="signup-card">
+        <div class="signup-content">
+            <div class="signup-form">
+                <h2 class="mb-4">Create Account</h2>
+                <form id="signupForm" method="POST" action="{% url 'Signup' %}">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <input type="text"
+                               name="username"
+                               class="form-control"
+                               placeholder="Username"
+                               required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="email"
+                               name="email"
+                               class="form-control"
+                               placeholder="Email Address"
+                               required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="password"
+                               name="password"
+                               class="form-control"
+                               placeholder="Password"
+                               required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="password"
+                               name="confirm_password"
+                               class="form-control"
+                               placeholder="Confirm Password"
+                               required>
+                    </div>
+                    <button type="submit" class="btn btn-signup">Sign Up</button>
+                </form>
+
+                <div class="social-signup">
+                    <p class="text-center mb-4">Or sign up with</p>
+                    <button class="social-btn mb-3">
+                        <img src="https://cdn-icons-png.flaticon.com/128/300/300221.png" width="24" height="24">
+                        <span>Continue with Google</span>
+                    </button>
+                    <button class="social-btn">
+                        <img src="https://cdn-icons-png.flaticon.com/128/5968/5968764.png" width="24" height="24">
+                        <span>Continue with Facebook</span>
+                    </button>
+                </div>
+
+                <p class="text-center mt-4">
+                    Already have an account? <a href="{% url 'Login' %}" class="text-decoration-none">Login</a>
+                </p>
+            </div>
+            <div class="signup-image"
+                <div class="content">
+                    <h2 class="mb-4">Welcome to FoodFinder</h2>
+                    <p>Join our community of food lovers and discover amazing restaurants near you!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

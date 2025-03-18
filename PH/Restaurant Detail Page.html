@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Italian Paradise - FoodFinder</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    .gallery-container {
+      position: relative;
+      height: 400px;
+      overflow: hidden;
+    }
+
+    .gallery-main {
+      height: 300px;
+      overflow: hidden;
+    }
+
+    .gallery-thumbnails {
+      height: 100px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .gallery-thumbnail {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+    }
+
+    .gallery-thumbnail:hover {
+      opacity: 1;
+    }
+
+    .restaurant-info {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .badge-custom {
+      font-size: 0.9em;
+      padding: 8px 15px;
+      margin-right: 10px;
+      border-radius: 20px;
+    }
+
+    .menu-item {
+      transition: transform 0.3s;
+    }
+
+    .menu-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .rating-large {
+      font-size: 2.5em;
+      font-weight: bold;
+      color: #FF4B2B;
+    }
+
+    .btn-primary {
+      background-color: #FF4B2B;
+      border-color: #FF4B2B;
+    }
+
+    .btn-primary:hover {
+      background-color: #FF3517;
+      border-color: #FF3517;
+    }
+
+    .nav-tabs .nav-link.active {
+      color: #FF4B2B;
+      border-bottom: 3px solid #FF4B2B;
+    }
+
+    .side-card {
+      position: sticky;
+      top: 20px;
+    }
+  </style>
+</head>
+<body class="bg-light">
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <div class="container">
+      <a class="navbar-brand" href="#">FoodFinder</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="homepage.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Explore</a></li>
+          <li class="nav-item"><a class="nav-link" href="Modern Login Page.html">Login</a></li>
+		  <li class="nav-item"><a class="nav-link btn btn-primary text-white" href="signup.html">Sign Up</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container my-4">
+    <div class="row">
+      <!-- Left Content -->
+      <div class="col-lg-8">
+        <!-- Gallery Section -->
+        <div class="gallery-container mb-4">
+          <div class="gallery-main">
+            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5" class="w-100 h-100" style="object-fit: cover;" alt="Restaurant Main Image">
+          </div>
+          <div class="gallery-thumbnails mt-2">
+            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5" class="gallery-thumbnail" alt="Thumbnail 1">
+            <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0" class="gallery-thumbnail" alt="Thumbnail 2">
+            <img src="https://images.unsplash.com/photo-1512152272829-e3139592d56f" class="gallery-thumbnail" alt="Thumbnail 3">
+            <img src="https://images.unsplash.com/photo-1464500542410-1396074bf230" class="gallery-thumbnail" alt="Thumbnail 4">
+          </div>
+        </div>
+
+        <!-- Restaurant Info -->
+        <div class="restaurant-info p-4 mb-4">
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <h1 class="mb-2">Italian Paradise</h1>
+              <div class="mb-3">
+                <span class="badge bg-primary badge-custom">Italian</span>
+                <span class="badge bg-success badge-custom">Open Now</span>
+                <span class="badge bg-info badge-custom">$$</span>
+              </div>
+              <p class="text-muted">
+                <i class="fas fa-map-marker-alt"></i> 123 Restaurant Street, Foodie City
+              </p>
+            </div>
+            <div class="text-end">
+              <div class="rating-large">4.8</div>
+              <div class="text-muted">500+ reviews</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Content Tabs -->
+        <ul class="nav nav-tabs mb-4" id="restaurantTabs" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="menu-tab" data-bs-toggle="tab" href="#menu">Menu</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="reviews-tab" data-bs-toggle="tab" href="#reviews">Reviews</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="photos-tab" data-bs-toggle="tab" href="#photos">Photos</a>
+          </li>
+        </ul>
+
+        <div class="tab-content" id="restaurantTabContent">
+          <!-- Menu Tab -->
+          <div class="tab-pane fade show active" id="menu">
+            <h3 class="mb-4">Popular Dishes</h3>
+            <div class="row g-4">
+              <div class="col-md-6">
+                <div class="card menu-item">
+                  <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002" class="card-img-top" alt="Pizza">
+                  <div class="card-body">
+                    <h5 class="card-title">Margherita Pizza</h5>
+                    <p class="card-text">Fresh tomatoes, mozzarella, basil</p>
+                    <p class="card-text"><strong>$15.99</strong></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card menu-item">
+                  <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141" class="card-img-top" alt="Pasta">
+                  <div class="card-body">
+                    <h5 class="card-title">Fettuccine Alfredo</h5>
+                    <p class="card-text">Creamy sauce, parmesan cheese</p>
+                    <p class="card-text"><strong>$18.99</strong></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Reviews Tab -->
+          <div class="tab-pane fade" id="reviews">
+            <!-- Reviews content will be loaded here -->
+          </div>
+
+          <!-- Photos Tab -->
+          <div class="tab-pane fade" id="photos">
+            <!-- Photos grid will be loaded here -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Sidebar -->
+      <div class="col-lg-4">
+        <div class="card side-card">
+          <div class="card-body">
+            <h5 class="card-title">Make a Reservation</h5>
+            <form>
+              <div class="mb-3">
+                <label class="form-label">Date</label>
+                <input type="date" class="form-control">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Time</label>
+                <select class="form-select">
+                  <option>6:00 PM</option>
+                  <option>7:00 PM</option>
+                  <option>8:00 PM</option>
+                  <option>9:00 PM</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Party Size</label>
+                <select class="form-select">
+                  <option>2 people</option>
+                  <option>3 people</option>
+                  <option>4 people</option>
+                  <option>5+ people</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Book Now</button>
+            </form>
+
+            <hr>
+
+            <h5 class="card-title">Restaurant Hours</h5>
+            <ul class="list-unstyled">
+              <li class="mb-2">Mon-Fri: 11:00 AM - 10:00 PM</li>
+              <li class="mb-2">Sat: 10:00 AM - 11:00 PM</li>
+              <li>Sun: 10:00 AM - 9:00 PM</li>
+            </ul>
+
+            <hr>
+
+            <h5 class="card-title">Contact</h5>
+            <p><i class="fas fa-phone me-2"></i> (555) 123-4567</p>
+            <p><i class="fas fa-envelope me-2"></i> info@italianparadise.com</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-light py-4 mt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h5>FoodFinder</h5>
+          <p>Discover & Share Amazing Food Experiences</p>
+        </div>
+        <div class="col-md-4">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a href="#" class="text-light">About Us</a></li>
+            <li><a href="#" class="text-light">Contact</a></li>
+            <li><a href="#" class="text-light">Terms of Service</a></li>
+            <li><a href="#" class="text-light">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5>Connect With Us</h5>
+          <div class="social-links">
+            <a href="#" class="text-light me-3"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="text-light me-3"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-light me-3"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
