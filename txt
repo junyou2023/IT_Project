@@ -1,0 +1,19 @@
+Project Introduction
+This Django project is designed to provide a comprehensive platform for managing and exploring restaurants. It features a user-friendly interface for both administrators and end-users, allowing seamless interaction with restaurant data.
+Key Components:
+User Authentication:
+Users can sign up, log in, and log out. The system validates user credentials and enforces strong password policies.
+Restaurant Management:
+Administrators can add, update, and remove restaurants. Each restaurant has detailed information, including name, address, type, and ratings.
+Rating and Review System:
+Users can rate and review restaurants. The system calculates average ratings and displays them on the restaurant detail page.
+Search and Filter:
+Users can search for restaurants by name, type, or recommended dishes. The search functionality is robust and user-friendly.
+Favorites:
+Users can mark restaurants as favorites. The system keeps track of user preferences and displays them on the user profile page.
+Profile Management:
+Users can view their profile, which includes their favorite restaurants and ratings. The profile page provides a personalized experience.
+Technologies Used:
+Django: The primary framework for building the web application.
+Bootstrap: For responsive and modern UI design.
+jQuery: For handling AJAX requests and enhancing user interactions.

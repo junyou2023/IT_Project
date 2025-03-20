@@ -1,0 +1,53 @@
+{% extends "Base.html" %}
+{% load static %}
+
+{% block title %}List - FoodFinder{% endblock %}
+
+{% block extra_css %}
+    <link href="{% static 'css/list.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block extra_js %}
+
+{% endblock %}
+
+
+{% block content %}
+      <div class="container my-4">
+    <!-- Add a search tip below the title -->
+    <div class="container my-5">
+        <h1 class="text-center mb-5 display-4 fw-bold text-primary">
+            Discover Flavors
+            <i class="fas fa-star text-warning ms-2"></i>
+        </h1>
+        <div id="searchAlert" class="alert alert-info mb-4" style="display: none;">
+            Your keyword is：<strong><span id="searchKeyword">{{ query }}</span></strong>
+        </div>
+    </div>
+    <div class="row g-4">
+        {% for restaurant in restaurants %}
+            <div class="col-md-6">
+                <div class="card menu-item h-100">
+                    <img src="{{ restaurant.photos.first.photo.url }}" class="card-img-top" alt="Burger Palace" loading="lazy">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ restaurant.name }}</h5>
+                        <p class="card-text">{{ restaurant.address }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="badge bg-primary">{{ restaurant.restaurant_type.name }}</div>
+                            <a href="{% url 'RestaurantDetail' restaurant.id %}" class="btn btn-primary view-restaurant-btn" data-restaurant-id="{{ restaurant.id }}">View</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        {% endfor %}
+    </div>
+
+      </div>
+
+{% endblock %}
+
+
+
+
+

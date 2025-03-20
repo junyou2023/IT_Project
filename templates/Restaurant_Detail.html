@@ -1,0 +1,319 @@
+{% extends "Base.html" %}
+{% load static %}
+
+{% block title %}{{ restaurant.name }} - FoodFinder{% endblock %}
+
+{% block extra_css %}
+<link href="{% static 'css/Review.css' %}" rel="stylesheet">
+<link href="{% static 'css/detail.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/detail.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+    <div id="loginStatus"
+     data-logged-in="{% if is_logged_in %}True{% else %}False{% endif %}">
+</div>
+
+<div class="container my-4">
+    <div class="row">
+        <!-- Main content on the left side  -->
+        <div class="col-lg-8">
+            <!-- Restaurant Information + Favorites Button -->
+            <div class="restaurant-info p-4 mb-4 shadow-sm">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <h1 class="mb-2">{{ restaurant.name }}</h1>
+                        <div class="mb-3">
+                            <span class="badge bg-primary badge-custom">{{ restaurant.restaurant_type.name }}</span>
+                            <span class="badge bg-success badge-custom">Open Now</span>
+                            <span class="badge bg-info badge-custom">$$</span>
+                        </div>
+                        <p class="text-muted">
+                            <i class="fas fa-map-marker-alt"></i> {{ restaurant.address }}
+                        </p>
+                    </div>
+                    <div class="text-end">
+                        <!-- Average rating for dynamic digital growth -->
+                        <div class="rating-large">{{ average_rating }}</div>
+                        <div class="text-muted">{{ restaurant.view_count }} reviews</div>
+                    </div>
+                </div>
+
+                <!-- Favorites button -->
+                <div class="text-end">
+                    {% if is_favorited %}
+                        <button id="favorite-button"
+                                class="btn btn-secondary"
+                                data-restaurant-id="{{ restaurant.id }}">
+                            <i class="fas fa-heart text-danger"></i> Collected
+                        </button>
+                    {% else %}
+                        <button id="favorite-button"
+                                class="btn btn-primary"
+                                data-restaurant-id="{{ restaurant.id }}">
+                            <i class="fas fa-heart"></i> Favorite
+                        </button>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Dining room picture area -->
+            <div class="gallery-container mb-4">
+                <div class="gallery-main">
+                    {% if restaurant.photos.first %}
+                        <img src="{{ restaurant.photos.first.photo.url }}"
+                             class="w-100 h-100"
+                             style="object-fit: cover;"
+                             alt="Main Image">
+                    {% else %}
+                        <img src="{% static 'img/default_restaurant.jpg' %}"
+                             class="w-100 h-100"
+                             style="object-fit: cover;"
+                             alt="Default Image">
+                    {% endif %}
+                </div>
+                <div class="gallery-thumbnails mt-2">
+                    {% for photo in restaurant.photos.all %}
+                        <img src="{{ photo.photo.url }}"
+                             class="gallery-thumbnail"
+                             alt="Thumbnail {{ forloop.counter }}">
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Tabs: Reviews, Menu -->
+            <ul class="nav nav-tabs mb-4" id="restaurantTabs">
+                <li class="nav-item">
+                    <a class="nav-link active"
+                       id="reviews-tab"
+                       data-bs-toggle="tab"
+                       href="#reviews"
+                       aria-current="page">
+                       Reviews
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"
+                       id="menu-tab"
+                       data-bs-toggle="tab"
+                       href="#menu">
+                       Menu
+                    </a>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="restaurantTabContent">
+                <!-- Reviews Tab (activated by default) -->
+                <div class="tab-pane fade show active" id="reviews">
+                    <div class="container my-4">
+                        <div class="row">
+                            <!-- Left column: overview of ratings -->
+                            <div class="col-lg-4 mb-4">
+                                <div class="rating-box p-3 rounded bg-light">
+                                    <div class="text-center mb-3">
+                                        <div class="rating-large">{{ average_rating }}</div>
+                                        <div class="star-rating mb-2">
+                                            {% for i in rating_range %}
+                                                {% if i <= average_rating %}
+                                                    <i class="fas fa-star"></i>
+                                                {% else %}
+                                                    <i class="far fa-star"></i>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                        <div class="text-muted">
+                                            Based on {{ restaurant.view_count }} reviews
+                                        </div>
+                                    </div>
+                                    <div class="rating-bars">
+                                        {% for score in rating_counts %}
+                                            <div class="d-flex align-items-center mb-2">
+                                                <span class="me-2">{{ score.score }}</span>
+                                                <div class="rating-bar flex-grow-1">
+                                                    <div class="rating-fill"
+                                                         style="width: {{ score.percent }}%">
+                                                    </div>
+                                                </div>
+                                                <span class="ms-2">{{ score.count }}</span>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                                <!-- Scoring form (can be submitted either anonymously or by logging in) -->
+                                <form method="POST"
+                                      action="{% url 'RateRestaurant' restaurant.id %}"
+                                      class="mt-3">
+                                    {% csrf_token %}
+                                    <div class="star-rating mb-2">
+                                        <input type="hidden" name="score" id="scoreInput" value="0">
+                                        <i class="far fa-star star" data-score="1"></i>
+                                        <i class="far fa-star star" data-score="2"></i>
+                                        <i class="far fa-star star" data-score="3"></i>
+                                        <i class="far fa-star star" data-score="4"></i>
+                                        <i class="far fa-star star" data-score="5"></i>
+                                    </div>
+                                    <button type="submit"
+                                            class="btn write-review-btn text-white w-100 mb-4">
+                                        <i class="fas fa-pencil-alt me-2"></i>Submit Rating
+                                    </button>
+                                </form>
+                            </div>
+
+                            <!-- Right column: comment list + comment form -->
+                            <div class="col-lg-8">
+                                <!-- List of existing reviews -->
+                                {% for comment in comments %}
+                                    <div class="review-card card p-4 mb-4">
+                                        <div class="review-header d-flex align-items-center mb-2">
+                                            <img src="{% if comment.user and comment.user.avatar %}
+                                                        {{ comment.user.avatar.url }}
+                                                      {% else %}
+                                                        {% static 'img/default_avatar.png' %}
+                                                      {% endif %}"
+                                                 class="review-avatar me-3"
+                                                 alt="User Avatar">
+                                            <div>
+                                                <h5 class="mb-1">
+                                                    {% if comment.user %}
+                                                        {{ comment.user.username }}
+                                                    {% else %}
+                                                        Anonymous
+                                                    {% endif %}
+                                                </h5>
+                                                <div class="text-muted">
+                                                    <small>{{ comment.created_at|date:'Y-m-d H:i:s' }}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p>{{ comment.content }}</p>
+                                    </div>
+                                {% empty %}
+                                    <p>No comments yet. Be the first to leave one!</p>
+                                {% endfor %}
+
+                                <!-- Comment form (can be submitted either anonymously or by logging in) -->
+                                <div class="mt-4">
+                                    <form method="POST"
+                                          action="{% url 'SubmitComment' restaurant.id %}">
+                                        {% csrf_token %}
+                                        <div class="mb-3">
+                                            <textarea class="form-control"
+                                                      name="content"
+                                                      rows="3"
+                                                      placeholder="Write your review here..."></textarea>
+                                        </div>
+                                        <button type="submit"
+                                                class="btn btn-success">
+                                            Submit Review
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Menu Tab -->
+                <div class="tab-pane fade" id="menu">
+                    <h3 class="mb-4">Popular Dishes</h3>
+                    <div class="row g-4">
+                        {% for dish in restaurant.recommended_dishes.all %}
+                            <div class="col-md-6">
+                                <div class="card menu-item">
+                                    <img src="{{ dish.photo.url }}"
+                                         class="card-img-top"
+                                         alt="{{ dish.name }}">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ dish.name }}</h5>
+                                        <p class="card-text">{{ dish.description }}</p>
+                                        <p class="card-text">
+                                            <strong>${{ dish.price }}</strong>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Sidebar -->
+        <div class="col-lg-4">
+            <div class="card side-card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Make a Reservation</h5>
+                    <!-- Booking Form (AJAX Submission) -->
+                    <form id="reservationForm">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label class="form-label">Date</label>
+                            <input type="date"
+                                   name="date"
+                                   class="form-control"
+                                   required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Time</label>
+                            <input type="time"
+                                   name="time"
+                                   class="form-control"
+                                   required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Party Size</label>
+                            <input type="number"
+                                   name="party_size"
+                                   class="form-control"
+                                   min="1"
+                                   max="50"
+                                   required>
+                        </div>
+                        <button type="submit"
+                                class="btn btn-primary w-100">
+                            Book Now
+                        </button>
+                    </form>
+
+                    <hr>
+
+                    <h5 class="card-title">Restaurant Hours</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">Mon-Fri: 11:00 AM - 10:00 PM</li>
+                        <li class="mb-2">Sat: 10:00 AM - 11:00 PM</li>
+                        <li>Sun: 10:00 AM - 9:00 PM</li>
+                    </ul>
+
+                    <hr>
+
+                    <h5 class="card-title">Contact</h5>
+                    <p><i class="fas fa-phone me-2"></i> {{ restaurant.phone }}</p>
+                    <p><i class="fas fa-envelope me-2"></i> info@italianparadise.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal box for zooming in on images -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content bg-transparent border-0">
+      <button type="button"
+              class="btn-close btn-close-white position-absolute top-0 end-0 m-3"
+              data-bs-dismiss="modal">
+      </button>
+      <img id="zoomedImage"
+           class="img-fluid"
+           src=""
+           alt="Zoomed Image"
+           style="max-height: 90vh;">
+    </div>
+  </div>
+</div>
+{% endblock %}

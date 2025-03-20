@@ -1,0 +1,32 @@
+ .nav-hover::after {
+      background: var(--bs-primary);
+    }
+    .logo-icon {
+      filter: none;
+    }
+    .bg-gradient {
+      box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    }
+
+        .menu-item {
+      transition: transform 0.3s ease-in-out;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .card-img-top {
+      height: 250px;
+      object-fit: cover;
+      transition: transform 0.3s ease,
+                  border 0.3s ease,
+                  box-shadow 0.3s ease;
+    }
+
+    .menu-item:hover .card-img-top {
+      transform: scale(1.05);
+    }
+
+    .menu-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
